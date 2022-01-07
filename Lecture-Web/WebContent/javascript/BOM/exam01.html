@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+/*
+ * 브라우저 객체 모델(BOM)
+ * 	- window
+ 		- location
+ 		- navigator
+ 		- history
+ 		- screen
+ 		- document
+ */
+ 
+ 	window.alert('!!!!')
+ 	/* var aaa = 10
+ 	bbb = 20
+ 	alert(`aaa : ${aaa}, bbb : ${bbb}`) */
+ 	
+ 	let sub = window.open("", "", "width=400, height=300")
+ 	if(!sub) {
+ 		alert('팝업창')
+ 	}
+ 	
+
+ 	/* sub.moveTo(100, 100)
+ 	
+ 	setInterval(function() {
+ 		sub.moveBy(20, 20)
+ 	}, 1000) */
+ 	
+ 	
+ 	let width = screen.width
+ 	let height = screen.height
+ 	
+ 	sub.resizeTo(width, height)
+ 	
+ 	
+</script>
+</head>
+<body>
+
+</body>
+</html>

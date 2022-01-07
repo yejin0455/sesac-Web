@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	input[type=password] { /*input 태그의 타입이 password면 실행*/
+		background-color: olive;
+	}
+	
+	img {
+		width: 100px;
+		height: 100px;
+		border: 3px solid black;
+	}
+	
+	img[src ^= "../"] {
+		border-color: blue;
+	}
+	
+	img[src $= 'gif'] {
+		border-color: green;
+	}
+	
+	img[src *= o] {
+		border-color: orange;
+	}
+</style>
+</head>
+<body>
+	<form>
+		아이디 : <input type="text"><br>
+		패스워드 : <input type="password"><br>
+	</form>
+	<br>
+	<img src="/Lecture-Web/html/images/dog1.jpg">
+	<img src="../html/images/dog2.jpg">
+	<img src="../html/images/sun.gif">
+	<img src="../html/images/pencil.png">
+</body>
+</html>

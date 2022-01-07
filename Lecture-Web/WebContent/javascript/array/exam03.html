@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	let array = [10, 20, 30]
+	
+/* 	let copyArr = array  //shallow copy(얕은 복사)  -> 같은 번지를 참조함
+	
+	document.write(`array : ${array} <br>`)
+	document.write(`copyArr : ${copyArr} <br>`)
+	
+	copyArr[1] = 2000
+	
+	document.write(`array : ${array} <br>`)
+	document.write(`copyArr : ${copyArr} <br>`) */
+	
+	
+	
+	let copyArr = []  //deep copy(깊은 복사)  -> 아예 다른 번지로 객체 생성
+	for(let data of array) {
+		copyArr.push(data)
+	}
+	
+	document.write(`array : ${array} <br>`)
+	document.write(`copyArr : ${copyArr} <br>`)
+	
+	copyArr[1] = 2000
+	
+	document.write(`array : ${array} <br>`)
+	document.write(`copyArr : ${copyArr} <br>`)
+	
+	
+	
+//	let copyArr2 = [10, 20, 30]
+	let copyArr2 = [...array]
+	
+	document.write(`array : ${array} <br>`)
+	document.write(`copyArr : ${copyArr} <br>`)
+	document.write(`copyArr2 : ${copyArr2} <br>`)
+</script>
+</head>
+<body>
+
+</body>
+</html>
