@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>글 등록 페이지</title>
+<link rel="stylesheet" href="/Mission-Web/css/layout.css">
+<link rel="stylesheet" href="/Mission-Web/css/board.css">
 <style>
 hr {
 	width: 80%
@@ -41,12 +43,17 @@ table {
 </script>
 </head>
 <body>
+	<header>
+		<jsp:include page="/jsp/include/topMenu.jsp" />
+	</header>
+	<section>
 	<div align="center">
 		<hr>
 			<h2>새글 등록</h2>
 		<hr>
 		<br>
 		<form action="write.jsp" method="post" onsubmit="return doWrite()">
+		<input type="hidden" name="writer" value="${ userVO.id }">
 			<table border="1">
 				<tr>
 					<th width="15%">제목</th>
@@ -54,7 +61,10 @@ table {
 				</tr>
 				<tr>
 					<th>글쓴이</th>
-					<td><input type="text" name="writer" required></td>
+					<td>
+					${ userVO.id }
+					<!-- <input type="text" name="writer" required> -->
+					</td>
 				</tr>
 				<tr>
 					<th>내용</th>
@@ -65,5 +75,9 @@ table {
 			<input type="submit" value="새글등록">
 		</form>
 	</div>
+	</section>
+		<footer>
+		<%@ include file="/jsp/include/footer.jsp" %> <!-- 절대경로 위치 - Mission-Web/ <include, web-inf, xml> -->
+	</footer>
 </body>
 </html>

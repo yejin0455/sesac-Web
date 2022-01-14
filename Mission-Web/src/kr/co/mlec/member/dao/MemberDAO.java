@@ -47,7 +47,6 @@ public class MemberDAO {
 				list.add(member);
 			}
 
-			JDBCClose.close(pstmt, conn);
 
 		} catch (Exception e) {
 			e.printStackTrace();

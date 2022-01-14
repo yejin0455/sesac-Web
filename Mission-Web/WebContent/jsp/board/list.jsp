@@ -48,6 +48,19 @@
 	function goWriteForm() {
 		location.href = "writeForm.jsp"
 	}
+	
+	function doAction(boardNo) {
+		<c:choose>
+			<c:when test="${ not empty userVO}">
+				location.href = "detail.jsp?no=" + boardNo
+			</c:when>
+			<c:otherwise>
+				if(confirm('로그인 서비스가 필요합니다\n로그인 페이지로 이동하시겠습니다?')) {
+					location.href = '/Mission-Web/jsp/login/loginForm.jsp'
+				}
+			</c:otherwise>
+		</c:choose>
+	}
 </script>
 </head>
 <body>
@@ -71,15 +84,24 @@
 		<c:forEach items="${ list }" var="board">
 				<tr>
 					<td style="text-align:center;">${ board.no }</td>
-					<td><a href="detail.jsp?no=${ board.no }">
-						<c:out value="${ board.title }" /></a></td>
-					<td><c:out value="${ board.writer }" /></td>
-					<td style="text-align:center;">${ board.regDate }</td>
+	
+					<td>
+						<a href = "javascript:doAction(${ board.no })">
+							<c:out value="${ board.title }" />
+						</a>
+					<%-- <a href="detail.jsp?no=${ board.no }">
+						<c:out value="${ board.title }" /></a> --%>
+					</td>
+					<td>${ board.writer }</td>
+					<td>${ board.regDate }</td>
 				</tr>
 			</c:forEach>	
 		</table>
 		<br>
+		
+		<c:if test="${ not empty userVO }">
 		<button onclick="goWriteForm()">새글등록</button>
+		</c:if>
 	</div>
 	</section>
 	<footer>
