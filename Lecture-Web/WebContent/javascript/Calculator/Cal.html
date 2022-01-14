@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+<style>
+	table {
+		width:240px;
+		height:240px;
+	}
+	
+	input {
+		width:90%;
+		height:80%;
+	}
+	#result {
+		text-align:right
+	}
+</style>
+<script type="text/javascript">
+	function clickBtn(obj) {
+		let data = obj.value
+		
+		let result = document.getElementById("result")
+		
+		if(data == 'clear') {
+			result.value = ''
+		} else if(data == '=') {
+			result.value = eval(result.value)
+		} else if(data == '%') {
+			result.value /= 100 
+		} else {
+			result.value += data
+		}	
+	}
+</script>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td colspan=4><input id="result" type="text"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="7" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="8" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="9" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="/" onclick="clickBtn(this)"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="4" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="5" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="6" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="*" onclick="clickBtn(this)"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="1" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="2" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="3" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="-" onclick="clickBtn(this)"></td>
+
+		</tr>
+		<tr>
+			<td><input type="button" value="0" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="." onclick="clickBtn(this)"></td>
+			<td><input type="button" value="+" onclick="clickBtn(this)"></td>
+			<td><input type="button" value="%" onclick="clickBtn(this)"></td>
+		</tr>
+		<tr>
+			<td colspan=2><input type="button" value="=" onclick="clickBtn(this)"></td>
+			<td colspan=2><input type="button" value="clear" onclick="clickBtn(this)"></td>
+		</tr>
+
+	</table>
+</body>
+</html>
