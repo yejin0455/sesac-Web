@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.mlec.board.vo.BoardVO;
+import kr.co.mlec.board.vo.PagingVO;
 import kr.co.mlec.util.ConnectionFactory;
 import kr.co.mlec.util.JDBCClose;
 
@@ -17,34 +18,71 @@ import kr.co.mlec.util.JDBCClose;
  */
 
 public class BoardDAO {
-
-	// 페이지 사이즈 5개로 제한
-	final int PAGESIZE = 5;
-
+	
+	/**
+	 * 페이징
+	 */
+	public int totalCount() {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int totalList = 0;
+		
+		try {
+			conn = new ConnectionFactory().getConnection();
+	         StringBuilder sql = new StringBuilder();
+	         sql.append("select count(*) from ");
+	         sql.append("(select * from tbl_board order by no desc) ");
+	         sql.append("tbl_board ");
+	         pstmt = conn.prepareStatement(sql.toString());
+	         
+	         ResultSet rs = pstmt.executeQuery();
+	         rs.next();
+	         
+	         totalList = rs.getInt(1);
+	         
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCClose.close(pstmt, conn);
+		}
+		return totalList;
+	}
+	
+	
 	/**
 	 * 전체게시글 조회
 	 */
-	public List<BoardVO> selectAllBoard() {
+	public List<BoardVO> pagingList(int curPage) {
 
+		PagingVO paging = new PagingVO();
 		List<BoardVO> list = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		
+		int startNum = ((curPage-1) * paging.getDisplayRow()) + 1;
+		int endNum = curPage * paging.getDisplayRow();
 
 		try {
 			conn = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("select no, title, writer, to_char(reg_date, 'yyyy-mm-dd') as reg_date ");
-			sql.append("from tbl_board ");
-			sql.append("order by no desc ");
+			sql.append("select * from ");
+			sql.append("(select ROWNUM as row_num, no, title, writer, view_cnt, to_char(reg_date, 'yyyy-mm-dd') as reg_date ");
+			sql.append("from (select * from tbl_board order by no desc) ");
+			sql.append("tbl_board) ");
+			sql.append("where row_num >= ? and row_num <= ? ");
 			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endNum);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				int no = rs.getInt("no");
 				String title = rs.getString("title");
 				String writer = rs.getString("writer");
+				int viewCnt = rs.getInt("view_cnt");
 				String regDate = rs.getString("reg_date");
-				BoardVO board = new BoardVO(no, title, writer, regDate);
+				BoardVO board = new BoardVO(no, title, writer, viewCnt, regDate);
 
 				list.add(board);
 			}
@@ -57,6 +95,7 @@ public class BoardDAO {
 
 		return list;
 	}
+
 
 	/**
 	 * 새 글 등록
@@ -176,44 +215,5 @@ public class BoardDAO {
 		}
 
 	}
-
-	/**
-	 * 게시판의 총 페이지 수 추출
-	 */
-	public int boardPage() {
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		// 게시글 수
-		int postCnt = 0;
-		// 페이지 수
-		int pageCnt = 0;
-
-		try {
-			conn = new ConnectionFactory().getConnection();
-			StringBuilder sql = new StringBuilder();
-			sql.append(" select count(*) as post_cnt from tbl_board ");
-			pstmt = conn.prepareStatement(sql.toString());
-			ResultSet rs = pstmt.executeQuery();
-
-			rs.next();
-			postCnt = rs.getInt("post_cnt");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCClose.close(pstmt, conn);
-		}
-
-		// 나머지가 0일 때, 몫 = 페이지 수이고 나머지가 0이 아닐 때, 몫+1이 페이지 수
-		if (postCnt % PAGESIZE == 0)
-			pageCnt = postCnt / PAGESIZE;
-		else
-			pageCnt = postCnt / PAGESIZE + 1;
-
-		return pageCnt;
-	}
-	
-	
 
 }

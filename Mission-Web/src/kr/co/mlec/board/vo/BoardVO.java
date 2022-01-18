@@ -14,11 +14,12 @@ public class BoardVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardVO(int no, String title, String writer, String regDate) {
+	public BoardVO(int no, String title, String writer, int viewCnt, String regDate) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.writer = writer;
+		this.viewCnt = viewCnt;
 		this.regDate = regDate;
 	}
 
