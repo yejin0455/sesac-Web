@@ -11,19 +11,19 @@
 		$('#btn01').click(function() {
 			// div 안에 <h1>세번째 문장</h1> 추가하기
 			/* 
-			let h1Tag = document.createElement('h1')
-			let text = document.createTextNode('세번째 문장')
-			h1Tag.appendChild(text)
+			let h1Tag = document.createElement('h1')  //createElement() -> 요소 만들기
+			let text = document.createTextNode('세번째 문장')  //createTextNode() -> 선택한 요소에 텍스트 추가
+			h1Tag.appendChild(text)  //appendChild() -> 선택한 요소 안에 자식 요소 추가
 			//console.log(h1Tag)
-			document.querySelector('div').appendChild(h1Tag)
+			document.querySelector('div').appendChild(h1Tag)  //querySelector() -> 선택자에 해당하는 첫번째 요소
 			 */
 			 
 			 $('div').append('<h1>세번째 문장</h1>')
 		})
 		
 		$('#btn02').click(function() {
-			$('ol').append('<li>노랑</li>')
-			$('ol').prepend  //append자식의 맨 처음으로 올라감
+			$('ol').append('<li>노랑</li>')  //append() -> 선택한 요소의 내용 뒤에 추가
+			$('ol').prepend  //prepend() -> 선택한 요소의 내용 앞에 추가
 		})
 	})
 	

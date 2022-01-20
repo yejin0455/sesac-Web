@@ -7,15 +7,16 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	$(document).ready(function() {
+	$(document).ready(function(){
+		
 		$.ajax({
-			url: 'person.json',
-			success: function(data) {
-				console.log(data)
-				console.log(typeof data)
+			url: 'person.jsp',
+			datatype: 'json',
+			success: function(data){
+				//문자열 -> 객체 인식필요
+				//memberList = JSON.parse(data) 원래는 parse로 변경해줄 수 있음 
 				memberList = eval(data)
-				//memberList = JSON.parse(data)
-				console.log(memberList)
+				console.log(memberList) //객체로 제대로 인식해서 나옴
 			}
 		})
 	})

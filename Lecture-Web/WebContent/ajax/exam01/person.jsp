@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 [
 	{
-		id: "hong",
-		name: "홍길동"
+		'id': "hong",
+		'name': "홍길동"
 	},
 	{
-		id: "park",
-		name: "박길동"
+		'id': "park",
+		'name': "박길동"
 	}
 ]

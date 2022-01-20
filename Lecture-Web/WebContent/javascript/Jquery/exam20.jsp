@@ -16,8 +16,8 @@
 	$(document).ready(function() {
 		$('button').click(function() {
 			/* 
-			let pTags = document.getElementsByTagName("p")
-//			pTags[0].parentNode.removeChild(pTags[0])  //부모노드에서 자식을 찾아서 지움
+			let pTags = document.getElementsByTagName("p")  //특정 태그명을 가지고 있는 element의 집합을 가져오는 함수
+//			pTags[0].parentNode.removeChild(pTags[0])  //부모노드에서 자식을 찾아서 지움, 첫번째꺼 한개만 지워짐
 			
 			for(let i=0; i<pTags.length; i++) {  //전체 p태그 삭제
 				pTags[0].parentNode.removeChild(pTags[0])
